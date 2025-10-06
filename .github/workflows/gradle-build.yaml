@@ -29,5 +29,5 @@ jobs:
           SNAPSHOT: true
         run: |
           cd src/calculator
-          ./gradlew publishAllPublicationToGitHubPackagesRepository --no-daemon
+          ./gradlew publishGprPublicationToGitHubPackagesRepository --no-daemon
           
