@@ -44,8 +44,23 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/petscm/neo_loan__calculator")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = findProperty("gpr.user") as String? ?:
+                    System.getenv("GITHUB_ACTOR")
+                password = findProperty("gpr.key") as String? ?:
+                    System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["java"])
+            versionMapping {
+                usage("java-api") {
+                    fromResolutionOf("runtimeClasspath")
+                }
+                usage("java-runtime") {
+                    fromResolutionResult()
+                }
             }
         }
     }
