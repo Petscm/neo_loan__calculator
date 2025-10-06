@@ -6,7 +6,7 @@ jobs:
     name: Public snapshot
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup JDK17
         uses: actions/setup-java@v5
@@ -19,6 +19,7 @@ jobs:
 
       - name: Build without tests
         run: |
+          cd src/calculator
           chmod +x gradlew
           ./gradlew build -x test -x check --no-daemon
 
