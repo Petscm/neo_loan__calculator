@@ -25,7 +25,8 @@ jobs:
 
       - name: Publish
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_ACTOR: ${{github.actorj}}
+          GITHUB_TOKEN: ${{github.token}}
           SNAPSHOT: true
         run: |
           cd src/calculator
