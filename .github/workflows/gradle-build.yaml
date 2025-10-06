@@ -26,9 +26,8 @@ jobs:
       - name: Publish
         env:
           GITHUB_ACTOR: ${{github.actor}}
-          GITHUB_TOKEN: ${{github.token}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           SNAPSHOT: true
         run: |
-          cd src/calculator
-          ./gradlew publishGprPublicationToGitHubPackagesRepository --no-daemon
+          ./src/calculator/gradlew publishGprPublicationToGitHubPackagesRepository --no-daemon
           
