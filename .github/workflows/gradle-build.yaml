@@ -29,8 +29,8 @@ jobs:
           GITHUB_TOKEN: ${{github.token}}
           SNAPSHOT: true
         run: |
-          cat $GITHUB_ACTOR
-          cat $GITHUB_TOKEN
-          cd src/calculator
+          cat $GITHUB_ACTOR |
+          cat $GITHUB_TOKEN |
+          cd src/calculator |
           ./gradlew publishGprPublicationToGitHubPackagesRepository --no-daemon
           
