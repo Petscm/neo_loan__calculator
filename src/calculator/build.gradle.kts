@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "petscm.neo_loan"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1-testSNAPSHOT"
 description = "calculator"
 
 java {
