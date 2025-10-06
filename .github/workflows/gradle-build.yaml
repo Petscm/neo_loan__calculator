@@ -29,5 +29,6 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           SNAPSHOT: true
         run: |
+          cd src/calculator
           ./gradlew publishGprPublicationToGitHubPackagesRepository --no-daemon
           
