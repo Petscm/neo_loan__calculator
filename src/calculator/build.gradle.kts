@@ -1,13 +1,18 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
 plugins {
     java
     `maven-publish`
     id("org.springframework.boot") version "3.5.6"
     id("io.spring.dependency-management") version "1.1.7"
+    id("org.openapi.generator") version "7.14.0"
 }
 
 group = "petscm.neo_loan"
 version = "0.0.1-testSNAPSHOT"
 description = "calculator"
+
+val overridedBuildDir = layout.buildDirectory.dir("generated").get().asFile.path
 
 java {
     toolchain {
@@ -27,6 +32,11 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+    implementation("io.swagger.core.v3:swagger-annotations:2.2.38")
+    implementation("org.openapitools:openapi-generator-gradle-plugin:7.14.0")
+    implementation("jakarta.validation:jakarta.validation-api:3.1.1")
+    implementation("org.openapitools:jackson-databind-nullable:0.2.7")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
@@ -36,6 +46,37 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir("$overridedBuildDir/generated" )
+        }
+    }
+}
+
+tasks.register("GenerateOpenapiServer1_0_0v", GenerateTask::class) {
+    generatorName = "spring"
+    remoteInputSpec = "https://raw.githubusercontent.com/Petscm/neo_loan__api_schemas/refs/heads/main/calculator-service/1_0_0v/api.yaml"
+    outputDir = "$overridedBuildDir/generated"
+    ignoreFileOverride = ".openapi-generator-ignore"
+    configOptions.set(mapOf(
+        "generator" to "spring-boot",
+        "useJakartaEe" to "true",
+        "invokerPackage" to "petscm.neo_loan.api_schemas.server",
+        "apiPackage" to "petscm.neo_loan.api_schemas.server.api",
+        "modelPackage" to "petscm.neo_loan.api_schemas.server.model",
+        "configPackage" to "petscm.neo_loan.api_schemas.server.config",
+        "basePackage" to "petscm.neo_loan.api_schemas.server.base",
+        "useOptional" to "true",
+        "openApiNullabel" to "false",
+        "interfaceOnly" to "false",
+        "sourceFolder" to "",
+        "additionalModelTypeAnnotations" to "@lombok.Builder\n@lombok.NoArgsConstructor\n@lombok.AllArgsConstructor",
+        "generatedConstructorWithRequiredArgs" to "false",
+        "useTags" to "true",
+    ))
 }
 
 publishing {
