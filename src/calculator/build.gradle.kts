@@ -64,7 +64,7 @@ sourceSets {
     }
 }
 
-tasks.register("GenerateOpenapiServer1_0_0v", GenerateTask::class) {
+tasks.register("GenerateOpenapiServer", GenerateTask::class) {
     generatorName = "spring"
     remoteInputSpec = "https://raw.githubusercontent.com/Petscm/neo_loan__api_schemas/refs/heads/main/calculator-service/1_0_0v/api.yaml"
     outputDir = "$overridedBuildDir/generated"

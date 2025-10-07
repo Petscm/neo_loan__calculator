@@ -23,6 +23,7 @@ jobs:
         run: |
           cd src/calculator
           chmod +x gradlew
+          ./gradlew GenerateOpenapiServer
           ./gradlew build -x test -x check --no-daemon
 
       - name: Publish
