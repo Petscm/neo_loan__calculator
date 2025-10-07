@@ -30,9 +30,17 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    all{
+        exclude(group="ch.qos.logback", module="logback-classic")
+    }
+}
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+    implementation("org.springdoc:springdoc-openapi-starter-common:2.8.13")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13")
+    implementation("javax.xml.bind:jaxb-api:2.3.1")
+    implementation("org.glassfish.jaxb:jaxb-runtime:4.0.6")
     implementation("io.swagger.core.v3:swagger-annotations:2.2.38")
     implementation("org.openapitools:openapi-generator-gradle-plugin:7.14.0")
     implementation("jakarta.validation:jakarta.validation-api:3.1.1")
@@ -71,7 +79,7 @@ tasks.register("GenerateOpenapiServer1_0_0v", GenerateTask::class) {
         "basePackage" to "petscm.neo_loan.api_schemas.server.base",
         "useOptional" to "true",
         "openApiNullabel" to "false",
-        "interfaceOnly" to "false",
+        "interfaceOnly" to "true",
         "sourceFolder" to "",
         "additionalModelTypeAnnotations" to "@lombok.Builder\n@lombok.NoArgsConstructor\n@lombok.AllArgsConstructor",
         "generatedConstructorWithRequiredArgs" to "false",
