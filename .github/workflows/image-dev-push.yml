@@ -7,7 +7,7 @@ env:
   IMAGE_NAME: neo-loan-calculator-dev
   REPO: ${{ github.repository }}
   IMAGE_VERSION: ${{ github.sha }}
-  REPO_OWNER: ${{ github.owner }}
+  REPO_OWNER: ${{ github.repository_owner }}
   BP_JVM_VERSION: 17
 jobs:
   push:
