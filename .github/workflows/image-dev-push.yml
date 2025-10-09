@@ -42,7 +42,7 @@ jobs:
           ./gradlew build \
           -x test -x check
 
-      - name: Build OCI image
+      - name: Build and push OCI image
         run: |
           cd src/calculator
          
@@ -51,8 +51,6 @@ jobs:
           T_IMAGE_VERSION=$(echo "$IMAGE_VERSION" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g') 
           
           ./gradlew bootBuildImage \
-          --imageName="$T_REGISTRY/$T_IMAGE_NAME:$T_IMAGE_VERSION"
-
-      - name: Push OCI image
-        run: |
+          --imageName="$T_REGISTRY/$T_IMAGE_NAME:$IMAGE_VERSION"
+          
           docker push "$REGISTRY/$GITHUB_ACTOR/$IMAGE_NAME:$IMAGE_VERSION"
