@@ -5,12 +5,10 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: neo-loan-calculator-dev
-  REPOSITORY: ${{ github.repository }}
+  REPO: ${{ github.repository }}
   IMAGE_VERSION: ${{ github.sha }}
-  GITHUB_ACTOR: ${{ github.actor }}
+  REPO_OWNER: ${{ github.owner }}
   BP_JVM_VERSION: 17
-  DOCKER_USERNAME: ${{ github.actor }}
-  DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   push:
     name: Push image
@@ -48,10 +46,10 @@ jobs:
           cd src/calculator
          
           T_REGISTRY=$(echo "$REGISTRY" | tr '[:upper:]' '[:lower:]')
-          T_ACTOR=$(echo "$GITHUB_ACTOR" | tr '[:upper:]' '[:lower:]')
+          T_OWNER=$(echo "$REPO_OWNER" | tr '[:upper:]' '[:lower:]')
           T_IMAGE_VERSION=$(echo "$IMAGE_VERSION" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g') 
           
           ./gradlew bootBuildImage \
-          --imageName="$T_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION"
+          --imageName="$T_REGISTRY/$T_OWNER/$IMAGE_NAME:$IMAGE_VERSION"
           
-          docker push "$T_REGISTRY/$T_ACTOR/$IMAGE_NAME:$T_IMAGE_VERSION"
+          docker push "$T_REGISTRY/$T_OWNER/$IMAGE_NAME:$T_IMAGE_VERSION"
