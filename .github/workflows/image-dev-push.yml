@@ -56,4 +56,4 @@ jobs:
           ./gradlew bootBuildImage \
           --imageName="$T_REGISTRY/$T_IMAGE_NAME:$IMAGE_VERSION"
           
-          docker push "$T_REGISTRY/$T_IMAGE_NAME"
+          docker push "$T_REGISTRY/$T_IMAGE_NAME:$T_IMAGE_VERSION"
