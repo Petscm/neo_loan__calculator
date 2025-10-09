@@ -45,6 +45,11 @@ jobs:
       - name: Build OCI image
         run: |
           cd src/calculator
+         
+          CLEAN_REGISTRY=$(echo "$REGISTRY" | tr '[:upper:]' '[:lower:]')
+          CLEAN_IMAGE_NAME=$(echo "$IMAGE_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g' | sed 's/--*/-/g')
+          CLEAN_IMAGE_VERSION=$(echo "$IMAGE_VERSION" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g') 
+          
           ./gradlew bootBuildImage \
           --imageName="$REGISTRY/$IMAGE_NAME:$IMAGE_VERSION"
 
