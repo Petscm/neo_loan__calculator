@@ -38,6 +38,7 @@ jobs:
       - name: Build project
         run: |
           cd src/calculator
+          ./gradlew GenerateOpenapiServer
           ./gradlew build \
           -x test -x check
 
