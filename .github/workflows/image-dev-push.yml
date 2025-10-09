@@ -4,7 +4,7 @@ on:
     branches: [dev]
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-dev
+  IMAGE_NAME: neo-loan-calculator-dev
   REPOSITORY: ${{ github.repository }}
   IMAGE_VERSION: ${{ github.sha }}
   GITHUB_ACTOR: ${{ github.actor }}
@@ -48,12 +48,9 @@ jobs:
           cd src/calculator
          
           T_REGISTRY=$(echo "$REGISTRY" | tr '[:upper:]' '[:lower:]')
-          T_REPOSITORY=$(echo "$REPOSITORY" | tr '[:upper:]' '[:lower:]')
-          
-          T_IMAGE_NAME=$(echo "$IMAGE_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g' | sed 's/--*/-/g')
           T_IMAGE_VERSION=$(echo "$IMAGE_VERSION" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g') 
           
           ./gradlew bootBuildImage \
-          --imageName="$T_REGISTRY/$T_IMAGE_NAME:$IMAGE_VERSION"
+          --imageName="$T_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION"
           
-          docker push "$T_REGISTRY/$T_IMAGE_NAME:$T_IMAGE_VERSION"
+          docker push "$T_REGISTRY/$IMAGE_NAME:$T_IMAGE_VERSION"
