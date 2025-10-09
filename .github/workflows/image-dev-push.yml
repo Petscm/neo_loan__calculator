@@ -44,6 +44,7 @@ jobs:
       - name: Build and push OCI image
         run: |
           cd src/calculator
+          echo "$REPO_OWNER"
          
           T_REGISTRY=$(echo "$REGISTRY" | tr '[:upper:]' '[:lower:]')
           T_OWNER=$(echo "$REPO_OWNER" | tr '[:upper:]' '[:lower:]')
