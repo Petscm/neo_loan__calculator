@@ -45,9 +45,11 @@ dependencies {
     implementation("org.openapitools:openapi-generator-gradle-plugin:7.14.0")
     implementation("jakarta.validation:jakarta.validation-api:3.1.1")
     implementation("org.openapitools:jackson-databind-nullable:0.2.7")
+    implementation("org.mapstruct:mapstruct:1.6.3")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
