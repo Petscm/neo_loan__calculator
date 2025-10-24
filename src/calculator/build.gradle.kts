@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "petscm.neo_loan"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0"
 description = "calculator"
 
 val overridedBuildDir = layout.buildDirectory.dir("generated").get().asFile.path
