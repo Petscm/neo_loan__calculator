@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: write
+      contents: read
     steps:
       - uses: actions/checkout@v5
 
@@ -54,4 +55,4 @@ jobs:
           --imageName="$T_REGISTRY/$T_OWNER/$IMAGE_NAME:$VERSION" \
           -PadditionalTag="$VERSION-$TAG_SHA"
           
-          docker push "$T_REGISTRY/$T_OWNER/$IMAGE_NAME" --all-tags --max-concurrent-uploads=1
+          docker push "$T_REGISTRY/$T_OWNER/$IMAGE_NAME" --all-tags
