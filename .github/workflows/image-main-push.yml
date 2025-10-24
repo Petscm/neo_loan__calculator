@@ -36,6 +36,7 @@ jobs:
 
       - name: Extract version from Project
         run: |
+          cd src/calculator
           VERSION=$(./gradlew -q printVersion)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
