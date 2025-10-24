@@ -3,3 +3,7 @@ server:
 spring:
   application:
     name: calculator
+offers-calculator:
+  base-rate: 12
+  base-insurance-amount: 100
+  base-insurance-rate: 2.8

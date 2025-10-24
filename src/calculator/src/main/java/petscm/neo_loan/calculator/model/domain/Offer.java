@@ -1,9 +1,8 @@
 package petscm.neo_loan.calculator.model.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
+import petscm.neo_loan.calculator.usecase.port.MonthlyPaymentCalc;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,4 +23,26 @@ public class Offer {
     private Boolean isSalaryClient;
     private BigDecimal psk;
     private List<PaymentScheduleElement> paymentSchedule;
+
+    @RequiredArgsConstructor
+    final class Builder {
+        private final MonthlyPaymentCalc monthlyPaymentCalculator;
+
+        @Value("${offers-calculator.base-rate}")
+        private BigDecimal baseRate;
+
+        @Value("${offers-calculator.base-insurance-rate}")
+        private volatile BigDecimal insuranceBaseRate;
+
+        Offer offer;
+        {
+            offer = new Offer();
+        }
+
+        public Builder validate(Statement statement) {
+            return this;
+        }
+
+
+    }
 }
