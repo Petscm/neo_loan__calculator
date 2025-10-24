@@ -82,6 +82,7 @@ tasks.register("GenerateOpenapiServer", GenerateTask::class) {
         "useOptional" to "true",
         "openApiNullabel" to "false",
         "interfaceOnly" to "true",
+        "useOptional" to "false",
         "sourceFolder" to "",
         "additionalModelTypeAnnotations" to "@lombok.Builder\n@lombok.NoArgsConstructor\n@lombok.AllArgsConstructor",
         "generatedConstructorWithRequiredArgs" to "false",
