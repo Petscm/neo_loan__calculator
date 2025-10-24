@@ -44,13 +44,13 @@ jobs:
       - name: Build and push OCI image
         run: |
           cd src/calculator
-          echo "$REPO_OWNER"
          
           T_REGISTRY=$(echo "$REGISTRY" | tr '[:upper:]' '[:lower:]')
           T_OWNER=$(echo "$REPO_OWNER" | tr '[:upper:]' '[:lower:]')
-          T_IMAGE_VERSION=$(echo "$IMAGE_VERSION" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g') 
+          
+          TAG=${IMAGE_VERSION:0:7}
           
           ./gradlew bootBuildImage \
-          --imageName="$T_REGISTRY/$T_OWNER/$IMAGE_NAME:$IMAGE_VERSION"
+          --imageName="$T_REGISTRY/$T_OWNER/$IMAGE_NAME:$TAG"
           
-          docker push "$T_REGISTRY/$T_OWNER/$IMAGE_NAME:$T_IMAGE_VERSION"
+          docker push "$T_REGISTRY/$T_OWNER/$IMAGE_NAME:$TAG"
