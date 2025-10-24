@@ -8,6 +8,7 @@ env:
   REPO: ${{ github.repository }}
   REPO_OWNER: ${{ github.repository_owner }}
   BP_JVM_VERSION: 17
+  VERSION: latest
 
 jobs:
   push:
@@ -38,7 +39,7 @@ jobs:
         run: |
           cd src/calculator
           VERSION=$(./gradlew -q printVersion)
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo $VERSION
 
       - name: Build project
         run: |
