@@ -8,7 +8,6 @@ env:
   REPO: ${{ github.repository }}
   REPO_OWNER: ${{ github.repository_owner }}
   BP_JVM_VERSION: 17
-  VERSION: latest
 
 jobs:
   push:
@@ -35,12 +34,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Extract version from Project
-        run: |
-          cd src/calculator
-          VERSION=$(./gradlew -q printVersion)
-          echo $VERSION
-
       - name: Build project
         run: |
           cd src/calculator
@@ -54,6 +47,7 @@ jobs:
           T_REGISTRY=$(echo "$REGISTRY" | tr '[:upper:]' '[:lower:]')
           T_OWNER=$(echo "$REPO_OWNER" | tr '[:upper:]' '[:lower:]')
           
+          VERSION=$(./gradlew -q printVersion)
           TAG_SHA=${GITHUB_SHA:0:7}
           
           ./gradlew bootBuildImage \
