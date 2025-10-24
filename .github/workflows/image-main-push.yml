@@ -54,4 +54,4 @@ jobs:
           --imageName="$T_REGISTRY/$T_OWNER/$IMAGE_NAME:$VERSION" \
           -PadditionalTag="$VERSION-$TAG_SHA"
           
-          docker push "$T_REGISTRY/$T_OWNER/$IMAGE_NAME" --all-tags
+          docker push "$T_REGISTRY/$T_OWNER/$IMAGE_NAME" --all-tags --max-concurrent-uploads=1
