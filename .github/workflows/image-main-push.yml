@@ -54,7 +54,6 @@ jobs:
           T_REGISTRY=$(echo "$REGISTRY" | tr '[:upper:]' '[:lower:]')
           T_OWNER=$(echo "$REPO_OWNER" | tr '[:upper:]' '[:lower:]')
           
-          VERSION=${{ steps.get_version.outputs.version }}
           TAG_SHA=${GITHUB_SHA:0:7}
           
           ./gradlew bootBuildImage \
