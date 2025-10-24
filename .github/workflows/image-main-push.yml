@@ -53,6 +53,8 @@ jobs:
           
           ./gradlew bootBuildImage \
           --imageName="$T_REGISTRY/$T_OWNER/$IMAGE_NAME:$VERSION" \
-          -PadditionalTag="$VERSION-$TAG_SHA"
+          -PadditionalTag="$VERSION-$TAG_SHA" \
+          -Pbuilder=paketobuildpacks/builder:tiny \
+          -PrunImage=paketobuildpacks/run:tiny-cnb 
           
           docker push "$T_REGISTRY/$T_OWNER/$IMAGE_NAME" --all-tags
